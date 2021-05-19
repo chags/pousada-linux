@@ -1,0 +1,8 @@
+name=apresentacao
+version=1.0.0
+app=apresentacao
+visibility=public
+use_helper=1
+use_session=0
+default_view=pousada
+view_not_found=404

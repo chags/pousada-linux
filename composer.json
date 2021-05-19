@@ -1,0 +1,7 @@
+{
+    "require": {
+    	"mpdf/mpdf": "^8.0",
+        "peppeocchi/php-cron-scheduler": "^3.0",
+        "phpmailer/phpmailer": "^6.1"
+    }
+}

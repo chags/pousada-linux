@@ -1,0 +1,8 @@
+name=pousada
+version=1.0.0
+app=pousada
+visibility=public
+use_helper=1
+use_session=0
+default_view=sala
+view_not_found=404
