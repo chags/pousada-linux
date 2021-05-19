@@ -68,7 +68,7 @@
 	    }
 
 	    public function terminal(){
-	       return  parent::select("logs", null, null, " ORDER BY id_log ASC LIMIT 10");	    	
+	       return  parent::select("logs", null, null, " ORDER BY id_log ASC");	    	
 	    }
 
 	    public function Sair($user){

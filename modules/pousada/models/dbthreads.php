@@ -39,31 +39,31 @@ class dbthreads extends DB
     public function logs($log,$hospede){
 
         switch ($log) {
-            case '1':
+            case 1:
                 # entra na sala
                 parent::insert("logs",['log_observacao' => $hospede." Entra na sala"],null);
                 break;
-            case '2':
+            case 2:
                 # entra no quarto
                 parent::insert("logs",['log_observacao' => $hospede." Entra no quarto"],null);
                 break;
-            case '3':
+            case 3:
                 # Vai para  o quarto
                  parent::insert("logs",['log_observacao' => $hospede." sai da sala vai para o quarto"],null);
                 break;
-            case '4':
+            case 4:
                 # Vai para sala
                  parent::insert("logs",['log_observacao' => $hospede." sai do quarto vai para sala"],null);             
                 break;
-             case '5':
+             case 5:
                 # pegou o controle da tv
                   parent::insert("logs",['log_observacao' => $hospede."  Estava na sala sozinho e foi para o quarto"],null);             
                 break;  
-              case '6':
+              case 6:
                 # pegou o controle da tv
                   parent::insert("logs",['log_observacao' => $hospede."  estou aqui"],null);             
                 break;                            
-               case '7':
+               case 7:
                 # pegou o controle da tv
                   parent::insert("logs",['log_observacao' => $hospede."  entrou na sala e pegou controle"],null);             
                 break;            
@@ -122,8 +122,6 @@ class dbthreads extends DB
            
             if($hospede['usuario_local'] == "sala"){    
                 #contando o tempo de sala 
-
-                $this->logs(1,$hospede['id_usuario']);
                 $this->semaphoreTV($hospede['id_usuario']);
                 #passaNdo tempo assitindo verifica-se novamente como esta a sala
                 $sala = parent::select("usuario", null,['usuario_local' => "sala"]);
@@ -131,11 +129,12 @@ class dbthreads extends DB
                 $num = count($sala);               
                 if($num == 1 && $sala[0]['id_usuario'] == $hospede['id_usuario']){     
                 #hospede indo para o quarto
-                 parent::update("usuario",['usuario_local' => 'quarto', 'usuario_controle' => 'nao'],['id_usuario' => $hospede['id_usuario']]);    
-                 
+                    parent::update("usuario",['usuario_local' => 'quarto', 'usuario_controle' => 'nao'],['id_usuario' => $hospede['id_usuario']]);    
+                    $this->logs(3,$hospede['usuario_nome']);
                 }elseif ($num  >= 2 && $hospede['usuario_controle'] == "nao" ) {
                     # code...
                     parent::update("usuario",['usuario_local' => 'quarto', 'usuario_controle' => 'nao'],['id_usuario' => $hospede['id_usuario']]);
+                    $this->logs(3,$hospede['usuario_nome']);
                 }
                 continue; 
 
@@ -144,15 +143,18 @@ class dbthreads extends DB
                 $this->semaphoreQuarto($hospede['id_usuario']);
                 #agora vamos verificar como esta a sala
                 $sala = parent::select("usuario", null,['usuario_local' => "sala"]);
+
                 #agroa vamos verifiar se podemos ir para a sal
                 if($sala == ""){
-                    parent::update("usuario",['usuario_local' => 'sala', 'usuario_controle' => 'sim'],['id_usuario' => $hospede['id_usuario']]); 
+                    parent::update("usuario",['usuario_local' => 'sala', 'usuario_controle' => 'sim'],['id_usuario' => $hospede['id_usuario']]);
+                    $this->logs(4,$hospede['usuario_nome']); 
                     #hospede passa o tempo assitindo e com o controle na mão
                     //$this->semaphoreTV($hospede['id_usuario']);
 
                 }elseif ($sala[0]['usuario_canal'] == $hospede['usuario_canal']) {
                     #Hospede entra na sala porque pessoas estão assitindo o  mesmo canal que ele
-                    parent::update("usuario",['usuario_local' => 'sala'],['id_usuario' => $hospede['id_usuario']]); 
+                    parent::update("usuario",['usuario_local' => 'sala'],['id_usuario' => $hospede['id_usuario']]);
+                     $this->logs(4,$hospede['usuario_nome']);                     
                      #passando tempo na sala                     
                     //$this->semaphoreTV($hospede['id_usuario']);
                                                           

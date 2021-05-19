@@ -1,26 +1,44 @@
-POUSADA LINUX - UM TRABALHO De SISTEMAS OPERACIONAIS
-Em uma pousada há apenas uma televisão que pega N canais. Os hóspedes apenas descansam ou então assistem televisão, mas cada hóspede tem um canal preferido e só assiste televisão nesse canal. O hóspede que tiver o controle remoto pode escolher o canal de sua preferência, e então todos os outros hóspedes que gostam desse mesmo canal e quiserem assistir televisão, podem assistir juntos. Os que preferem outros canais ficam dormindo (bloqueado). Apenas quando o último hóspede que está assistindo televisão em determinado canal sai e vai descansar, é que o controle remoto fica livre, e algum hóspede pode escolher outro canal. Utilizando semáforos, modele os threads “hóspedes".
+#### SINCRONIZANDO O GIT LOCAL COM O GITHUB VIA PROMPT
 
-Configuração:
-Ao iniciar a execução, o programa deverá solicitar ao usuário a quantidade de canais que podem ser sintonizados (N). Criação dos Hóspedes:
+##### FERRAMANTES E SISTEMA OPERACIONAL
+* WINDOWS
+* SUBLIME TEXT
+* PROMPT WINDOWS
 
-A interface deverá possuir um botão ou opção de menu que permita ao usuário criar um thread hóspede a qualquer momento.
-Durante a criação de cada thread hóspede o usuário deverá atribuir os seguintes parâmetros:
-Id: identificador do hóspede, que pode ser um número ou nome atribuído pelo usuário ou um número sequencial criado automaticamente;
-Canal: canal preferido do hóspede (1 à N);
-Tv: tempo (em segundos) que o hóspede fica assistindo televisão no seu canal preferido. Durante este tempo o hóspede deverá mostrar na interface que está fazendo alguma ação (processando);
-Td: tempo (em segundos) que o hóspede fica descansando sem assistir televisão e sem dormir. Durante este tempo o hóspede deverá mostrar na interface que está fazendo alguma ação (processando);
-Saídas:
-A interface deverá atender aos seguintes requisitos:
-✓ Mostrar o canal selecionado naquele instante.
-✓ Mostrar os dados de cada hóspede: identificador, canal preferido, tempo que ele passa assistindo televisão e o tempo que ele fica descansando.
-✓ Mostrar a cada instante, o status de cada thread hóspede (assistindo televisão, descansando ou dormindo (bloqueado)).
-✓ Mostrar um log com os principais eventos de cada hóspede.
+##### Vou partir do pressuposto de que todos saibam usar a linha de comando.
 
-baixe a pasta
-coloque a pasta na raiz do seu servidor e renoeie ela para nome de app
-instale o banco de dados que esta no arquivo SQL
+* DOWNLOAD DO GIT (http://git-scm.com/)
+* Atenção: Fique atento durante a instalação, pois ela irá perguntar se você quer que ela rode pelo prompt do windows. Marque essa opção!
+* Criar conta no Github (https://github.com/)
+* Na instalação do GIT vem o GIT BASH. Ele é parecido com o prompt do Windows, você precisará criar a chave SSH por ele, assim você insere a mesma na sua conta do github. Isso autoriza seu computador a enviar arquivos para seu repositório GITHUB online.
+* Inicie o GIT BASH e digite ssh-keygen -t rsa -C "seu-email@dominio.com". ATENÇÃO: Nesse momento ele pedirá usuário e senha, eu não quero ter que ficar digitando login e senha toda vez que fizer um envio para o github, por isso, nessa hora, clique ENTER todas as vezes até ele finalizar a criação da sua KEYGEN.
+* A chave SSH fica criada no arquivo  C:\Users\nome-do-seu-usuario\.ssh\id_rsa.pub.
+* Peque o conteúdo desse arquivo e copie.
+* No github, vá em configurações - SSH Keys - Add SHH Keys e em título coloque o que quiser e em Key cole seu ssh copiado anteriormente.
+* Pronto, você já tem a conexão. Vamos fazer nosso primeiro commit.
+* Na home do github você não terá muita coisa para ver, pois ainda não há nenhum repositório criado.
 
-o projeto é feito com threads usando CURL do PHP
-o retorno dos dados é pestencia no banco de dados usando o AJAX
+#### Vamos criar nosso repositório:
 
+* Clicamos no botão ( New repository ) e damos um nome para ele.
+* Existem 2 tipos de repositórios, públicos (0800) e privados (pagos). Crie um público mesmo.
+* Depois de criado ele já aparece na tela do repositório com algumas informações úteis. Copie e cole em um notepad, pois depois do nosso commit essas informações não aparecerão mais.
+
+#### Em nosso computador.
+git@github.com:michelribeiro/conexao-com-github.git
+* Vamos definir uma pasta para nosso projeto. Criaremos um arquivo chamado README.md.
+* Podemos abrir esse arquivo no notepad ou no editor de texto que preferir. Adicione no arquivo um texto qualquer.
+
+#### Usando o prompt do windows.
+
+* Navegue até a pasta que esta nosso projeto pelo prompt (Ex: c:/user/pasta-do-projeto) e vamos fazer nosso commit seguindo os passos abaixo:
+
+#### Atentem em mudar as informações de configuração abaixo para a do seu GITHUB!!!
+
+* git init
+* git add README.md
+* git commit -m "Meu primeiro commit"
+* git remote add origin git@github.com:seu-usuario/seu-repositorio.git
+* git push -u origin master
+
+OBS: No primeiro commit ele perguntará yes/no. Digite yes e nos próximos commits não pedirá mais nada.
